@@ -1,13 +1,9 @@
-FROM node:16
+FROM jenkins/agent:latest
 
-WORKDIR /app
+USER root
 
-COPY package*.json ./
+RUN apt-get update && \
+    apt-get install -y awscli
 
-RUN npm install
+USER jenkins
 
-COPY . .
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
